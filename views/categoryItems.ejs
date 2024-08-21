@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+    <h1><%= title %></h1>
+    <div>
+        <h2>Category: <%= category.name %></h2>
+        <p>Description: <%= category.description %></p>
+    </div>
+
+    <% if (items && items.length > 0) { %>
+        <h2>Items in this category:</h2>
+        <ul>
+            <% items.forEach((item) => { %>
+                <li>
+                    <strong><%= item.name %></strong>: <%= item.description %>
+                </li>
+            <% }) %>
+        </ul>
+    <% } else { %>
+        <p>No items found for this category.</p>
+    <% } %>
+
+    <a href="/categories/<%= category.id %>/edit">Edit Category</a>
+    <a href="/categories">Back to Categories</a>
+    <!-- Form to add a new item to this category -->
+    <a href="#" id="showFormLink">Add item in this category</a>
+
+    <!-- Form to add a new item to this category -->
+    <div id="addItemForm">
+        <h2>Add a new item in this category:</h2>
+        <form action="/items/new" method="POST">
+            <input type="hidden" name="categoryId" value="<%= category.id %>">
+            
+            <div>
+                <label for="itemName">Item Name:</label>
+                <input type="text" id="itemName" name="itemName" required>
+            </div>
+            <div>
+                <label for="itemDescription">Item Description:</label>
+                <input type="text" id="itemDescription" name="itemDescription" required>
+            </div>
+            <div>
+                <label for="itemAuthor">Author:</label>
+                <input type="text" id="itemAuthor" name="itemAuthor" required>
+            </div>
+            <div>
+                <label for="itemPrice">Price:</label>
+                <input type="number" id="itemPrice" name="itemPrice" required>
+            </div>
+            <div>
+                <label for="itemQuantity">Quantity:</label>
+                <input type="number" id="itemQuantity" name="itemQuantity" required>
+            </div>
+            <div>
+                <label for="itemISBN">ISBN:</label>
+                <input type="text" id="itemISBN" name="itemISBN" required>
+            </div>
+
+            <button type="submit">Add Item</button>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript to toggle the form visibility
+        document.getElementById('showFormLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            const form = document.getElementById('addItemForm');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
+</body>
+</html>

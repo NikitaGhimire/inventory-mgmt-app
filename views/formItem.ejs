@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1><%= title %></h1>
+    <form action="<%= action %>" method="post">
+        <div>
+            <label for="itemName">Item name:</label>
+            <input type="text" id="itemName" name="itemName" value="<%= item ? item.name : '' %>" required>
+        </div>
+        <div>
+            <label for="itemDescription">Description:</label>
+            <input type="text" id="itemDescription" name="itemDescription" value="<%= item ? item.description : '' %>" required>
+        </div>
+        <div>
+            <label for="itemAuthor">Author:</label>
+            <input type="text" id="itemAuthor" name="itemAuthor" value="<%= item ? item.author : '' %>" required>
+        </div>
+        <div>
+            <label for="itemPrice">Price:</label>
+            <input type="number" id="itemPrice" name="itemPrice" value="<%= item ? item.price : '' %>" required>
+        </div>
+        <div>
+            <label for="itemQuantity">Quantity:</label>
+            <input type="number" id="itemQuantity" name="itemQuantity" value="<%= item ? item.quantity : '' %>" required>
+        </div>
+        <div>
+            <label for="itemISBN">ISBN:</label>
+            <input type="text" id="itemISBN" name="itemISBN" value="<%= item ? item.isbn : '' %>" required>
+        </div>
+        <div>
+            <label for="itemCategory">Category:</label>
+            <select id="itemCategory" name="itemCategory" required>
+                <% categories.forEach((category) => { %>
+                    <option value="<%= category.id %>" <%= item && item.category_id === category.id ? 'selected' : '' %>><%= category.name %></option>
+                <% }) %>
+            </select>
+            <a href="/categories/new">Add new category</a>
+        </div>
+        <button type="submit"><%= item ? 'Update' : 'Add' %></button>
+    </form>
+</body>
+</html>
