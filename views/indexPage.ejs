@@ -3,20 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index Page</title>
+    <title>Dashboard | Bookstore Inventory</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <h1>Welcome to the Inventory Management System</h1>
-    <div class="container">
-        <div class="card">
-            <h2>Categories</h2>
-            <a href="/categories">View All Categories</a>
-        </div>
-        <div class="card">
-            <h2>Items</h2>
-            <a href="/items">View All Items</a>
-        </div>
+    <div class="dashboard-container">
+        <!-- Page Header -->
+        <header class="dashboard-header">
+            <h1><i class="fas fa-chart-pie me-2"></i>Dashboard Overview</h1>
+        </header>
+
+        <!-- Alert Messages -->
+        <% if (typeof error !== 'undefined') { %>
+            <div class="alert alert-danger" role="alert">
+                <%= error %>
+            </div>
+        <% } %>
+
+        <!-- Stats Cards Section -->
+        <section class="dashboard-stats mb-5">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="stats-card bg-gradient-primary">
+                        <div class="stats-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="stats-info">
+                            <h3>Total Books</h3>
+                            <h2><%= totalBooks %></h2>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="stats-card bg-gradient-success">
+                        <div class="stats-icon">
+                            <i class="fas fa-tags"></i>
+                        </div>
+                        <div class="stats-info">
+                            <h3>Categories</h3>
+                            <h2><%= totalCategories %></h2>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="stats-card bg-gradient-warning">
+                        <div class="stats-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="stats-info">
+                            <h3>Low Stock</h3>
+                            <h2><%= lowStockCount %></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions Section -->
+        <section class="dashboard-actions">
+            <div class="quick-actions-card">
+                <div class="quick-actions-header">
+                    <h2><i class="fas fa-bolt me-2"></i>Quick Actions</h2>
+                </div>
+                <div class="quick-actions-body">
+                    <div class="quick-actions-grid">
+                        <a href="/items/new" class="action-btn">
+                            <i class="fas fa-plus"></i>
+                            <span>Add New Book</span>
+                        </a>
+                        <a href="/categories/new" class="action-btn">
+                            <i class="fas fa-folder-plus"></i>
+                            <span>Add New Category</span>
+                        </a>
+                        <a href="/items" class="action-btn">
+                            <i class="fas fa-book"></i>
+                            <span>View All Books</span>
+                        </a>
+                        <a href="/categories" class="action-btn">
+                            <i class="fas fa-tags"></i>
+                            <span>Manage Categories</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
