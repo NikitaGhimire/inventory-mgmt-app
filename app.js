@@ -48,16 +48,21 @@ app.get("/", async (req, res) => {
     res.render("indexPage", {
       title: "Dashboard",
       currentPage: "dashboard",
-      totalBooks: totalBooksResult.rows[0].count,
-      totalCategories: totalCategoriesResult.rows[0].count,
-      lowStockCount: lowStockResult.rows[0].count,
-      recentBooks: recentBooksResult.rows
+      totalBooks: totalBooksResult?.rows[0]?.count || 0,
+      totalCategories: totalCategoriesResult?.rows[0]?.count || 0,
+      lowStockCount: lowStockResult?.rows[0]?.count || 0,
+      recentBooks: recentBooksResult?.rows || [],
+      error: null
     });
   } catch (err) {
     console.error('Error:', err);
     res.render("indexPage", {
       title: "Dashboard",
       currentPage: "dashboard",
+      totalBooks: 0,
+      totalCategories: 0,
+      lowStockCount: 0,
+      recentBooks: [],
       error: "Error loading dashboard data"
     });
   }
