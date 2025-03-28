@@ -7,42 +7,89 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <h1><%= title %></h1>
-    <form action="<%= action %>" method="post">
-        <div>
-            <label for="itemName">Item name:</label>
-            <input type="text" id="itemName" name="itemName" value="<%= item ? item.name : '' %>" required>
+    <div class="form-container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="page-title">
+                <i class="fas fa-<%= item ? 'edit' : 'plus' %>"></i> 
+                <%= title %>
+            </h1>
+            <a href="/items" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to Books
+            </a>
         </div>
-        <div>
-            <label for="itemDescription">Description:</label>
-            <input type="text" id="itemDescription" name="itemDescription" value="<%= item ? item.description : '' %>" required>
-        </div>
-        <div>
-            <label for="itemAuthor">Author:</label>
-            <input type="text" id="itemAuthor" name="itemAuthor" value="<%= item ? item.author : '' %>" required>
-        </div>
-        <div>
-            <label for="itemPrice">Price:</label>
-            <input type="number" id="itemPrice" name="itemPrice" value="<%= item ? item.price : '' %>" required>
-        </div>
-        <div>
-            <label for="itemQuantity">Quantity:</label>
-            <input type="number" id="itemQuantity" name="itemQuantity" value="<%= item ? item.quantity : '' %>" required>
-        </div>
-        <div>
-            <label for="itemISBN">ISBN:</label>
-            <input type="text" id="itemISBN" name="itemISBN" value="<%= item ? item.isbn : '' %>" required>
-        </div>
-        <div>
-            <label for="itemCategory">Category:</label>
-            <select id="itemCategory" name="itemCategory" required>
-                <% categories.forEach((category) => { %>
-                    <option value="<%= category.id %>" <%= item && item.category_id === category.id ? 'selected' : '' %>><%= category.name %></option>
-                <% }) %>
-            </select>
-            <a href="/categories/new">Add new category</a>
-        </div>
-        <button type="submit"><%= item ? 'Update' : 'Add' %></button>
-    </form>
+
+        <form action="<%= action %>" method="post" class="book-form">
+            <div class="form-row">
+                <div class="form-label">Book Title</div>
+                <div class="form-field">
+                    <input type="text" class="form-control" id="itemName" name="itemName" 
+                        value="<%= item ? item.name : '' %>" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-label">Author</div>
+                <div class="form-field">
+                    <input type="text" class="form-control" id="itemAuthor" name="itemAuthor" 
+                        value="<%= item ? item.author : '' %>" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-label">ISBN</div>
+                <div class="form-field">
+                    <input type="text" class="form-control" id="itemISBN" name="itemISBN" 
+                        value="<%= item ? item.isbn : '' %>" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-label">Price ($)</div>
+                <div class="form-field">
+                    <input type="number" class="form-control" id="itemPrice" name="itemPrice" 
+                        value="<%= item ? item.price : '' %>" step="0.01" min="0" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-label">Quantity</div>
+                <div class="form-field">
+                    <input type="number" class="form-control" id="itemQuantity" name="itemQuantity" 
+                        value="<%= item ? item.quantity : '' %>" min="0" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-label">Category</div>
+                <div class="form-field">
+                    <select class="form-select" id="itemCategory" name="itemCategory" required>
+                        <option value="">Select Category</option>
+                        <% categories.forEach((category) => { %>
+                            <option value="<%= category.id %>" 
+                                <%= item && item.category_id === category.id ? 'selected' : '' %>>
+                                <%= category.name %>
+                            </option>
+                        <% }) %>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-label">Description</div>
+                <div class="form-field">
+                    <textarea class="form-control" id="itemDescription" name="itemDescription" 
+                        rows="3" required><%= item ? item.description : '' %></textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-<%= item ? 'save' : 'plus' %>"></i>
+                    <%= item ? 'Update Book' : 'Add Book' %>
+                </button>
+                <a href="/items" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
