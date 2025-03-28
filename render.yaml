@@ -14,5 +14,5 @@ services:
 
 databases:
   - name: inventory-db
-    databaseName: inventory
+    databaseName: inventory_rra5
     plan: free
